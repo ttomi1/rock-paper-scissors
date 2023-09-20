@@ -1,3 +1,6 @@
+let playerSelection;
+let computerSelection;
+
 function getComputerChoice(){
     let choice = Math.random();
     if(choice >= 0 && choice < 0.33)
@@ -43,31 +46,47 @@ function playRound(playerSelection, computerSelection) {
     }
   }
 
-  function game(){
-    let playerScore = 0;
-    let computerScore = 0;
+  function getChoices(){
+    playerSelection = prompt("Choose rock, paper or scissors");
+    computerSelection = getComputerChoice();
+  }
 
-    for(let i = 0; i < 5; i++){
-        let playerSelection = prompt("Choose rock, paper or scissors");
-        let computerSelection = getComputerChoice();
-        let result = playRound(playerSelection, computerSelection);
-        console.log(result);
+  
+
+
+  function game(){
+
+    function addScore(result){
         if(result.match("You Win")){
             playerScore++;
         }
         else if(result.match("You Lose")){
             computerScore++;
         }
+      }
+
+      function getWinner(){
+        if(computerScore > playerScore){
+            console.log("You Lose!");
+        }
+        else if(playerScore > computerScore){
+            console.log("You Win!")
+        }
+        else{
+            console.log("Draw");
+        }
+      }
+
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for(let i = 0; i < 5; i++){
+        getChoices();    
+        let result = playRound(playerSelection, computerSelection);
+        console.log(result);
+        addScore(result);
     }
-    if(computerScore > playerScore){
-        console.log("You Lose!");
-    }
-    else if(playerScore > computerScore){
-        console.log("You Win!")
-    }
-    else{
-        console.log("Draw");
-    }
+    getWinner();
   }
 
   game();

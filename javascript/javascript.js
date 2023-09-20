@@ -51,32 +51,19 @@ function playRound(playerSelection, computerSelection) {
     computerSelection = getComputerChoice();
   }
 
-  
-
+  function getWinner(playerScore, computerScore){
+    if(computerScore > playerScore){
+        console.log("You Lose!");
+    }
+    else if(playerScore > computerScore){
+        console.log("You Win!")
+    }
+    else{
+        console.log("Draw");
+    }
+  }
 
   function game(){
-
-    function addScore(result){
-        if(result.match("You Win")){
-            playerScore++;
-        }
-        else if(result.match("You Lose")){
-            computerScore++;
-        }
-      }
-
-      function getWinner(){
-        if(computerScore > playerScore){
-            console.log("You Lose!");
-        }
-        else if(playerScore > computerScore){
-            console.log("You Win!")
-        }
-        else{
-            console.log("Draw");
-        }
-      }
-
     let playerScore = 0;
     let computerScore = 0;
 
@@ -84,12 +71,19 @@ function playRound(playerSelection, computerSelection) {
         getChoices();    
         let result = playRound(playerSelection, computerSelection);
         console.log(result);
-        addScore(result);
+        if(result.match("You Win")){
+            playerScore++;
+        }
+        else if(result.match("You Lose")){
+            computerScore++;
+        }
     }
-    getWinner();
+    getWinner(playerScore, computerScore);
   }
 
   game();
+
+  
    
   
   

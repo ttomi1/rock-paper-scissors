@@ -59,12 +59,30 @@ function getComputerChoice(){
     }
   }
 
+  let playerScore = 0;
+  let computerScore = 0;
+  const displayPlayerScore = document.querySelector(".player");
+  const displayComputerScore = document.querySelector(".computer");
+
+  function addScore(result, computerChoice){
+    if(result.match("You Win")){
+    playerScore++;
+    displayPlayerScore.textContent = "Player: " + playerScore;
+    }
+    else if(result.match("You Lose")){
+    computerScore++;
+    displayComputerScore.textContent = "Computer: " + computerScore;
+    }
+  }
+
 
 function playRound(e) {
     let computerChoice = getComputerChoice();
-    let winner = roundWinner(this.value, computerChoice);
-    console.log(winner);
     
+    const displayResult = document.querySelector(".result-text");
+    displayResult.textContent = roundWinner(this.value, computerChoice);
+    let result = roundWinner(this.value, computerChoice);
+    addScore(result, computerChoice);
   }
 
   

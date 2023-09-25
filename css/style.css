@@ -46,4 +46,12 @@ button{
     padding: 20px;
     font-size: 48px;
     color: white;
+    text-align: center;
+}
+
+.result-text{
+    margin-top: 48px;
+    font-size: 48px;
+    color: white;
+    text-align: center;
 }

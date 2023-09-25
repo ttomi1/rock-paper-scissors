@@ -20,13 +20,13 @@ function getComputerChoice(){
 
   function getWinner(playerScore, computerScore){
     if(computerScore > playerScore){
-        console.log("You Lose!");
+        return "You lost"
     }
     else if(playerScore > computerScore){
-        console.log("You Win!")
+        return "You won"
     }
     else{
-        console.log("Draw");
+        return "Draw";
     }
   }
 
@@ -61,9 +61,10 @@ function getComputerChoice(){
 
   let playerScore = 0;
   let computerScore = 0;
+  const body = document.querySelector("body");
   const displayPlayerScore = document.querySelector(".player");
   const displayComputerScore = document.querySelector(".computer");
-
+  const victory = document.querySelector(".result-text");
   function addScore(result, computerChoice){
     if(result.match("You Win")){
     playerScore++;
@@ -75,14 +76,25 @@ function getComputerChoice(){
     }
   }
 
+  function resetGame(){
+    victory.textContent = getWinner(playerScore, computerScore);
+    playerScore = 0;
+    computerScore = 0;
+    displayComputerScore.textContent = "Computer: 0";
+    displayPlayerScore.textContent = "Player: 0";
+  }
 
 function playRound(e) {
+    if(victory)
+        victory.textContent = '';
     let computerChoice = getComputerChoice();
-    
     const displayResult = document.querySelector(".result-text");
-    displayResult.textContent = roundWinner(this.value, computerChoice);
     let result = roundWinner(this.value, computerChoice);
+    displayResult.textContent = result;
     addScore(result, computerChoice);
+    if(playerScore == 5 || computerScore == 5){
+        resetGame();
+    }
   }
 
   
